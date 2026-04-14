@@ -1,0 +1,154 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  "model": "opencode/claude-opus-4-6",
+
+  "permission": {
+    "edit": "ask",
+    "webfetch": "ask",
+    "bash": {
+      "*": "ask",
+      "git status*": "allow",
+      "git diff*": "allow",
+      "git log*": "allow",
+      "grep *": "allow",
+      "rg *": "allow",
+      "find *": "allow",
+      "ls *": "allow",
+      "pwd": "allow"
+    }
+  },
+
+  "agent": {
+    "architect": {
+      "mode": "primary",
+      "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
+      "model": "opencode/claude-opus-4-6",
+      "permission": {
+        "edit": "allow",
+        "webfetch": "ask",
+        "bash": {
+          "*": "ask",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow"
+        },
+        "task": {
+          "*": "deny",
+          "developer": "allow",
+          "reviewer-codex": "allow",
+          "reviewer-gemini": "allow",
+          "reviewer-opus": "allow"
+        }
+      }
+    },
+
+    "developer": {
+      "mode": "subagent",
+      "description": "Implements only the approved plan, then asks reviewers to review the diff.",
+      "model": "opencode/claude-sonnet-4-6",
+      "permission": {
+        "edit": "allow",
+        "webfetch": "ask",
+        "bash": {
+          "*": "ask",
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "mkdir *": "allow",
+          "npm test*": "allow",
+          "pnpm test*": "allow",
+          "pytest*": "allow",
+          "go test*": "allow",
+          "cargo test*": "allow",
+          "mix *": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "docker compose *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny",
+          "reviewer-codex": "allow",
+          "reviewer-gemini": "allow",
+          "reviewer-opus": "allow"
+        }
+      }
+    },
+
+    "reviewer-codex": {
+      "mode": "subagent",
+      "description": "Reviews only the approved plan and the resulting diff. No edits.",
+      "model": "opencode/gpt-5.3-codex",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "*": "ask",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git status*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow"
+        }
+      }
+    },
+
+    "reviewer-gemini": {
+      "mode": "subagent",
+      "description": "Independent code reviewer focused on alternate solutions and blind spots.",
+      "model": "opencode/gemini-3-flash",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "*": "ask",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git status*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow"
+        }
+      }
+    },
+
+    "reviewer-opus": {
+      "mode": "subagent",
+      "description": "Senior reviewer used for important work or for resolving reviewer disagreements.",
+      "model": "opencode/claude-opus-4-6",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "*": "ask",
+          "git diff*": "allow",
+          "git log*": "allow",
+          "git status*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow"
+        }
+      }
+    }
+  }
+}
