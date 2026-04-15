@@ -24,13 +24,13 @@
     }
   },
   "agent": {
-    "architect": {
-      "mode": "primary",
-      "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/claude-opus-4-6",
+    "pro-reviewer-strict-diff": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/gpt-5.3-codex",
       "permission": {
-        "edit": "allow",
-        "webfetch": "ask",
+        "edit": "deny",
+        "webfetch": "deny",
         "bash": {
           "git status*": "allow",
           "git diff*": "allow",
@@ -47,15 +47,146 @@
           "echo *": "allow"
         },
         "task": {
-          "*": "deny",
-          "developer": "allow",
-          "reviewer-codex": "allow",
-          "reviewer-gemini": "allow",
-          "reviewer-opus": "allow"
+          "*": "deny"
         }
       }
     },
-    "developer": {
+    "pro-reviewer-alternative": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/gemini-3-flash",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "pro-reviewer-senior": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/claude-opus-4-6",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "free-reviewer-strict-diff": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/big-pickle",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "free-reviewer-alternative": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/nemotron-3-super-free",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "free-reviewer-senior": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/minimax-m2.5-free",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "pro-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
       "model": "opencode/claude-sonnet-4-6",
@@ -87,20 +218,28 @@
         },
         "task": {
           "*": "deny",
-          "reviewer-codex": "allow",
-          "reviewer-gemini": "allow",
-          "reviewer-opus": "allow"
+          "pro-reviewer-strict-diff": "allow",
+          "pro-reviewer-alternative": "allow",
+          "pro-reviewer-senior": "allow"
         }
       }
     },
-    "reviewer-codex": {
+    "free-developer": {
       "mode": "subagent",
-      "description": "Reviewer with given template.",
-      "model": "opencode/gpt-5.3-codex",
+      "description": "Implements only the approved plan, then asks reviewers to review the diff.",
+      "model": "opencode/big-pickle",
       "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
+        "edit": "allow",
+        "webfetch": "ask",
         "bash": {
+          "mkdir *": "allow",
+          "npm test*": "allow",
+          "pnpm test*": "allow",
+          "pytest*": "allow",
+          "go test*": "allow",
+          "cargo test*": "allow",
+          "mix *": "allow",
+          "docker compose *": "allow",
           "git status*": "allow",
           "git diff*": "allow",
           "grep *": "allow",
@@ -116,44 +255,20 @@
           "echo *": "allow"
         },
         "task": {
-          "*": "deny"
+          "*": "deny",
+          "free-reviewer-strict-diff": "allow",
+          "free-reviewer-alternative": "allow",
+          "free-reviewer-senior": "allow"
         }
       }
     },
-    "reviewer-gemini": {
-      "mode": "subagent",
-      "description": "Reviewer with given template.",
-      "model": "opencode/gemini-3-flash",
-      "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
-        "bash": {
-          "git status*": "allow",
-          "git diff*": "allow",
-          "grep *": "allow",
-          "rg *": "allow",
-          "find *": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "diff *": "allow",
-          "cat *": "allow",
-          "wc *": "allow",
-          "echo *": "allow"
-        },
-        "task": {
-          "*": "deny"
-        }
-      }
-    },
-    "reviewer-opus": {
-      "mode": "subagent",
-      "description": "Reviewer with given template.",
+    "pro-architect": {
+      "mode": "primary",
+      "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
       "model": "opencode/claude-opus-4-6",
       "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
+        "edit": "allow",
+        "webfetch": "ask",
         "bash": {
           "git status*": "allow",
           "git diff*": "allow",
@@ -170,7 +285,42 @@
           "echo *": "allow"
         },
         "task": {
-          "*": "deny"
+          "*": "deny",
+          "pro-developer": "allow",
+          "pro-reviewer-strict-diff": "allow",
+          "pro-reviewer-alternative": "allow",
+          "pro-reviewer-senior": "allow"
+        }
+      }
+    },
+    "free-architect": {
+      "mode": "primary",
+      "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
+      "model": "opencode/nemotron-3-super-free",
+      "permission": {
+        "edit": "allow",
+        "webfetch": "ask",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny",
+          "free-developer": "allow",
+          "free-reviewer-strict-diff": "allow",
+          "free-reviewer-alternative": "allow",
+          "free-reviewer-senior": "allow"
         }
       }
     }
