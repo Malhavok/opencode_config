@@ -20,4 +20,7 @@ Mark each point as:
 - should fix
 - optional
 
+Format each finding as one line: `<file>:<line> — <severity>: <point>`.
+If the whole approach has a better alternative, state it in one paragraph with the trade-off, not a rewrite.
+
 $POST_RULES

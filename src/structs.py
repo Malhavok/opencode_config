@@ -48,7 +48,7 @@ class Agent:
     model: str
     permission: Permissions
     template: pathlib.Path
-    additional_rules: list[pathlib.Path] | None = None
+    additional_rules: list[pathlib.Path] | None
 
     def make_agent_md(self, out_path: pathlib.Path) -> None:
         rules_content = []

@@ -1,5 +1,11 @@
 from .consts import CHEAP_PREFIX, FREE_PREFIX, MEDIUM_PREFIX, PRO_PREFIX
-from .roles import ReviewerTemplate, make_architect, make_developer, make_reviewer
+from .roles import (
+    CAVEMAN_TEMPLATE,
+    ReviewerTemplate,
+    make_architect,
+    make_developer,
+    make_reviewer,
+)
 
 ARCHITECT_NAME = "architect"
 DEVELOPER_NAME = "developer"
@@ -36,6 +42,12 @@ TOP_REVIEWERS = [
     PRO_PREFIX + SENIOR_REVIEWER_NAME,
 ]
 
+CAVEMAN_REVIEWERS = [
+    MEDIUM_PREFIX + STRICT_REVIEWER_NAME,
+    MEDIUM_PREFIX + ALTERNATIVE_REVIEWER_NAME,
+    MEDIUM_PREFIX + SENIOR_REVIEWER_NAME,
+]
+
 FREE_REVIEWERS = [
     FREE_PREFIX + STRICT_REVIEWER_NAME,
     FREE_PREFIX + ALTERNATIVE_REVIEWER_NAME,
@@ -57,7 +69,27 @@ REVIEWERS = [
     make_reviewer(
         PRO_PREFIX + SENIOR_REVIEWER_NAME, TOP_LOGIC_MODEL, ReviewerTemplate.SENIOR
     ),
+    # Top reviewers but in caveman mode.
+    make_reviewer(
+        MEDIUM_PREFIX + STRICT_REVIEWER_NAME,
+        TOP_STRICT_REVIEW_MODEL,
+        ReviewerTemplate.STRICT_DIFF,
+        additional_rules=[CAVEMAN_TEMPLATE],
+    ),
+    make_reviewer(
+        MEDIUM_PREFIX + ALTERNATIVE_REVIEWER_NAME,
+        TOP_ALTERNATIVE_REVIEW_MODEL,
+        ReviewerTemplate.ALTERNATIVE,
+        additional_rules=[CAVEMAN_TEMPLATE],
+    ),
+    make_reviewer(
+        MEDIUM_PREFIX + SENIOR_REVIEWER_NAME,
+        TOP_LOGIC_MODEL,
+        ReviewerTemplate.SENIOR,
+        additional_rules=[CAVEMAN_TEMPLATE],
+    ),
     # Free reviewers, you "pay" for what you get.
+    # Doesn't need to be a caveman, because it costs us nothing.
     make_reviewer(
         FREE_PREFIX + STRICT_REVIEWER_NAME,
         FREE_MODEL_1,
@@ -75,28 +107,31 @@ REVIEWERS = [
 
 DEVELOPERS = [
     # Top developer.
-    # All of them use top reviewers, as reviews
-    # are usually cheap and are to provide the most feedback.
     make_developer(
         PRO_DEVELOPER,
         TOP_CODE_MODEL,
         TOP_REVIEWERS,
     ),
     # Medium developer.
+    # Using top reviewers in caveman mode to reduce the cost.
     make_developer(
         MEDIUM_DEVELOPER,
         MEDIUM_CODE_MODEL,
-        TOP_REVIEWERS,
+        CAVEMAN_REVIEWERS,
+        additional_rules=[CAVEMAN_TEMPLATE],
     ),
     # Cheap developer.
+    # Using top reviewers in caveman mode to reduce the cost.
     make_developer(
         CHEAP_DEVELOPER,
         CHEAP_CODE_MODEL,
-        TOP_REVIEWERS,
+        CAVEMAN_REVIEWERS,
+        additional_rules=[CAVEMAN_TEMPLATE],
     ),
     # Free developer.
     # Only this one is using free reviewers,
     # the rest try to do the best work possible.
+    # Doesn't need to be a caveman, because it costs us nothing.
     make_developer(
         FREE_DEVELOPER,
         FREE_MODEL_1,
@@ -113,6 +148,7 @@ ARCHITECTS = [
         TOP_REVIEWERS,
     ),
     # All free, spend nothing.
+    # Doesn't need to be a caveman, because it costs us nothing.
     make_architect(
         FREE_ARCHITECT_NAME,
         FREE_MODEL_1,
@@ -123,15 +159,17 @@ ARCHITECTS = [
     make_architect(
         MEDIUM_ARCHITECT_NAME,
         TOP_LOGIC_MODEL,
-        [MEDIUM_DEVELOPER, PRO_DEVELOPER],
-        TOP_REVIEWERS,
+        [CHEAP_DEVELOPER, MEDIUM_DEVELOPER],
+        CAVEMAN_REVIEWERS,
+        additional_rules=[CAVEMAN_TEMPLATE],
     ),
     # Cheap architect, spends least money, medium effort plan.
     make_architect(
         CHEAP_ARCHITECT_NAME,
         TOP_CODE_MODEL,
         [FREE_DEVELOPER, CHEAP_DEVELOPER],
-        TOP_REVIEWERS,
+        CAVEMAN_REVIEWERS,
+        additional_rules=[CAVEMAN_TEMPLATE],
     ),
 ]
 

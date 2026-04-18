@@ -16,4 +16,8 @@ Review the approved plan and the diff with emphasis on:
 Your role is especially important when reviewers disagree.
 Be decisive and practical.
 
+Format each finding as one line: `<file>:<line> — <severity>: <point>`.
+When arbitrating between reviewers, issue a clear verdict and short rationale; do not hedge with "both views have merit".
+Weigh fix cost against blast radius: call out the few things that truly matter and let the rest go.
+
 $POST_RULES
