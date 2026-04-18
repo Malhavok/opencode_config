@@ -1,6 +1,5 @@
 import enum
 import pathlib
-from audioop import add
 
 from .consts import DEVELOPER_BASH, SAFE_BASH, Approval
 from .structs import Agent, Mode, Permissions
