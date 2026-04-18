@@ -2,10 +2,10 @@ import json
 import pathlib
 
 from src import structs
-from src.agents import AGENTS
+from src.agents import AGENTS, TOP_LOGIC_MODEL
 from src.consts import SAFE_BASH, Approval
 
-DEFAULT_MODEL = "opencode/claude-opus-4-6"
+DEFAULT_MODEL = TOP_LOGIC_MODEL
 OPENCODE_FILE = pathlib.Path("./opencode/opencode.json")
 AGENTS_DIR = pathlib.Path("./opencode/agents/")
 
