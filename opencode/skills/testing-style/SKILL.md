@@ -16,41 +16,17 @@ before adding anything.
 
 Write tests for:
 
-- Reusable library code (`utils/` in Python, `lib/` in Elixir).
+- Reusable library code.
 - Business rules, parsing, validation, scoring.
 - Non-trivial algorithms (graph walks, memoisation, DP transitions).
 - Edge cases and known-regression bugs.
 
 Do **not** write tests for:
 
-- One-off scripts / AoC day solutions (Elixir verifies them with
-  `./aoc test` running against `test.txt`, not ExUnit).
+- One-off scripts.
 - Framework internals, third-party libraries, trivial getters/setters.
-- Love2D scene / tween code (no tests in the corpus - do not invent a
-  framework without asking).
 
-## Python: hybrid unittest + bare assert
-
-Competitive / HackerRank scripts use `unittest.TestCase` as the runner but
-**bare `assert` with an f-string message**, not `self.assertEqual`. This is the
-user's signature style.
-
-```python
-# /Users/malhavok/Coding/Python/LegoBlocks/tests.py
-class Tests(unittest.TestCase):
-    def test_1(self) -> None:
-        result = lego_blocks(2, 2)
-        assert result == 3, f'{result=}'
-
-    def test_2(self) -> None:
-        result = lego_blocks(2, 3)
-        assert result == 7, f'{result=}'
-
-    @timeout_decorator.timeout(3)
-    def test_5(self) -> None:
-        result = lego_blocks(4, 5)
-        assert result == 35714, f'{result=}'
-```
+## Python: bare assert
 
 Use `f'{result=}'` (walrus-like self-documenting format) as the failure
 message. For multiple comparisons use an explicit format with named variables:
@@ -71,9 +47,8 @@ def test_1(self) -> None:
 
 ## Python: pytest for framework tests
 
-Framework / library tests (e.g. `AdventOfCode/tests/test_*.py`) use **pytest**
-with parametrize and fixtures. Always type-annotate parameters and return
-`-> None`.
+Framework / library tests use **pytest** with parametrize and fixtures.
+Always type-annotate parameters and return `-> None`.
 
 Parametrize layout:
 
@@ -136,8 +111,7 @@ This is a distinctive user pattern - keep using it for data-driven cases.
 
 ## Elixir: ExUnit describe blocks
 
-Day solutions are **not** ExUnit-tested. Only `lib/` modules get tests under
-`test/`. Structure:
+Structure:
 
 ```elixir
 defmodule GridTest do
@@ -176,12 +150,9 @@ Rules:
   description.
 - `setup` blocks return `%{key: value}` and the test destructures the second
   argument: `test "...", %{map: map} do`.
-- No `async: true` in this codebase. Leave it off unless you have a reason.
 - **No doctests** (`doctest Module`) are used. Don't add them.
 - Assert on the `{:ok, value}` shape first, then on the content:
   `assert {:ok, value} = fun(...)` (using `=` match, not `==`).
-- No Mox, no ExUnitProperties, no fixtures on disk - tests use small literal
-  inputs built inline.
 
 ## What makes a good assertion
 
@@ -221,10 +192,10 @@ silently.
 
 ## Run commands cheatsheet
 
-- Python pytest: `pytest tests/` or `pytest tests/test_grid2d.py`.
+- Python pytest: `pytest tests/` or `pytest tests/test_file.py`.
 - Python unittest: `python -m unittest` from the project root, or run
   `python tests.py` directly (the user's scripts typically have
   `if __name__ == '__main__': unittest.main()`).
-- Elixir: `mix test` from `/Users/malhavok/Coding/Elixir/eaoc/`.
+- Elixir: `mix test` .
 
 Verify before declaring done.

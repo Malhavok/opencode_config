@@ -178,8 +178,6 @@ literals, not integers: `:ok`, `:error`, `:missing`, `:notimplemented`,
   (`test_basic`, `test_tricky_logic`, `test_large_input`).
 - Elixir: `describe "Module.fun/arity"` blocks, tests named with the behaviour
   under test.
-- Lua: no tests written by the user - do not invent a test framework without
-  asking.
 
 ## File names
 
@@ -194,3 +192,31 @@ Always `snake_case`, no dashes, no camelCase in filenames.
 If you touch a legacy file that violates these rules, do not rename things in
 the same change. Match the file's existing vocabulary and add a separate todo
 if a broader rename is warranted.
+
+## Units
+
+If unit is not obvious from type, ensure to add it in variable name.
+
+Good:
+```python
+TIMEOUT_SECONDS = 1.0
+```
+
+```elixir
+@angle_radians 3.14159265 / 2
+@timeout_ms 1000
+```
+
+Bad:
+
+```python
+TIMEOUT = 1.0
+```
+
+```elixir
+@angle 3.14159265 / 2
+@timeout 1000
+```
+
+This is non-negotiable. If you touch a legacy file that violates these rules,
+consider at least adding a comment that would explain the unit.

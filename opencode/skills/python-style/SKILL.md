@@ -1,6 +1,6 @@
 ---
 name: python-style
-description: Python-specific idioms the user favours - NamedTuple-first data modelling, PEP 604 unions, classmethod factories, make_* class factories, pathlib everywhere, strict absolute imports with trailing commas, dispatch dicts, explicit BFS queues, assert as validation, no numpy/pandas. Load this before writing or reviewing any Python code.
+description: Python-specific idioms the user favours - NamedTuple-first data modelling, PEP 604 unions, classmethod factories, make_* class factories, pathlib everywhere, strict absolute imports with trailing commas, dispatch dicts, explicit BFS queues, assert as validation. Load this before writing or reviewing any Python code.
 metadata:
   scope: language
   language: python
@@ -9,8 +9,8 @@ metadata:
 # Python style
 
 Target: **Python 3.10+** (PEP 604 unions, `X | Y`, `@cache`, match-free - the
-user does not use `match`). No numpy / pandas / networkx / scipy in the
-corpus; algorithms are rolled by hand on top of the standard library.
+user does not use `match`). No numpy / pandas / networkx / scipy unless seriously needed;
+algorithms are rolled by hand on top of the standard library otherwise.
 
 Read **naming-conventions**, **control-flow-style**, **comments-style**, and
 **testing-style** before this. The rules below are Python additions, not
@@ -46,7 +46,7 @@ from typing import (
 ## `NamedTuple` is the default data class
 
 For lightweight immutable records - **reach for `NamedTuple` first**. The user
-explicitly chose it in `utils/tile2d.py` for performance and for free
+even explicitly chose it in some cases for performance and for free
 `__eq__`/`__lt__`.
 
 ```python
@@ -88,13 +88,6 @@ class Tile2D(NamedTuple):
     def from_line(cls, line: str, separator: str = ',') -> 'Tile2D':
         data = [int(elem.strip()) for elem in line.split(separator, maxsplit=1)]
         return cls(*data)
-```
-
-Every AoC day file gets one:
-
-```python
-class InputData(NamedTuple):
-    key_or_lock: list[Grid2D]
 ```
 
 ## When to reach for `@dataclass`
@@ -321,8 +314,7 @@ reverse_mapping = {value: key for key, value in value_mapping.items()}
 ## Generators
 
 Use `yield` only when streaming is the point (large iteration, early
-termination). The framework `utils/iterations.py` and `utils/tile2d.py`
-contain examples like `iterate_all_options`, `iterate_over_2d`.
+termination).
 
 ## `next(iter(...))`
 
@@ -365,16 +357,27 @@ user-facing errors at public boundaries; use `assert` for invariants.
 
 - `raise ValueError(f'...')` for bad input at a public boundary.
 - `raise NotImplementedError` for stubs (template files, unfinished branches).
-- Custom exceptions are small, empty classes named `FooError`:
+- Custom base exceptions are small, empty classes named `FooError`:
 
 ```python
-class NoTransactionError(Exception):
+class MyModuleError(Exception):
     pass
 ```
 
-- `try/except` is rare. When it has to catch broadly, use `except
-  BaseException as ex:` and **re-raise** after cleanup, with a `# noqa` and a
-  reason:
+- All module exceptions inherit the custom base exception, preferably adding
+  flavour to them:
+
+```python
+class SpecificError(MyModuleError):
+    def __init__(self, params):
+        super.__init__(f'New message using {params}')
+```
+
+- Do not leak abstraction, prefer raising local exception to something generic.
+- `try/except` is rare, exception are raised for unexpected cases.
+- When it has to catch broadly, use `except Exception as ex:`
+  (or `BaseException`) and **re-raise** after cleanup,
+  with a `# noqa` and a reason:
 
 ```python
 try:
@@ -395,28 +398,10 @@ for elem in filename.read_text().splitlines():
     ...
 ```
 
-For AoC-style empty-line-separated groups, use the reusable helper:
+Use `with open(...) as f` only when handling large files, streaming data etc.
 
-```python
-def load_empty_lines_split(filename: pathlib.Path) -> list[list[str]]:
-    """
-    Loads given filename and provides groups of lines that are separated in original files by empty line.
-    """
-    result = []
-    group = []
-
-    for line in filename.read_text().splitlines():
-        if len(line) == 0:
-            result.append(group)
-            group = []
-            continue
-        group.append(line)
-
-    if len(group) > 0:
-        result.append(group)
-
-    return result
-```
+- Ensure that you properly configure buffers if you do that.
+- Still `pathlib.Path` for files, never raw strings.
 
 ## Entry point idiom
 
@@ -434,7 +419,7 @@ if __name__ == '__main__':
 ```
 
 - `argparse`, not `click`/`typer`.
-- First positional arg typed `pathlib.Path`.
+- If args are files, type them with `pathlib.Path`.
 - `--long_option_name` with underscores (matches the user's style; the
   argparse attr name stays `args.long_option_name`).
 
@@ -476,55 +461,8 @@ Alphabetical within each group. No relative imports outside `tests/` packages.
   `heapq`, `bisect`, `itertools`, `functools` (`@cache`, `reduce`),
   `contextlib`, `re` (compile at module top), `enum`, `dataclasses`,
   `typing`, `argparse`, `logging`, `importlib`.
-- third-party: `pytest`, `pydantic`, `tqdm`, `timeout_decorator`, `PIL`,
-  `svgwrite`, `cairosvg`, `png`.
-- **Not used**: numpy, pandas, scipy, networkx. If you reach for one,
-  confirm with the user first.
-
-## Reusable framework primitives
-
-If you're in `AdventOfCode/utils/`, you can rely on:
-
-- `Tile2D`, `Tile3D` with operator overloads.
-- `Grid2D = make_grid(field_class=str)` and `make_grid(...)` for parametric
-  grids.
-- `CARDINAL_DIRECTIONS`, `ORDINAL_DIRECTIONS`, `EIGHT_DIRECTIONS`,
-  `PERPENDICULAR_DIRECTIONS`, `DIRECTION_CHARACTER_MAP`.
-- `Labyrinth(grid, wall='#', empty='.')`.
-- `Graph = make_graph(str)`, `iterate_all_options`, `iterate_over_2d`.
-- `StatusPrinter(lambda: print(...), call_every_seconds=1.0)`.
-- `load_empty_lines_split(filename)`.
-
-Extend these rather than re-rolling geometry.
-
-## Day file contract (AoC 2024 framework)
-
-Every `tasks/<year>/day<N>/main.py` exposes three symbols:
-
-```python
-import pathlib
-from typing import NamedTuple
-
-
-class InputData(NamedTuple):
-    pass
-
-
-def load_data(filename: pathlib.Path) -> InputData:
-    raise NotImplementedError
-
-
-def part1(filename: pathlib.Path) -> str | int:
-    input_data = load_data(filename)
-    raise NotImplementedError
-
-
-def part2(filename: pathlib.Path) -> str | int:
-    input_data = load_data(filename)
-    raise NotImplementedError
-```
-
-The CLI in `aoc.py` drives them. Do not add a `main()` in day files.
+- third-party: `pytest`, `pydantic`, `tqdm`, `timeout_decorator`, `numpy`,
+  `pandas`, `scipy`, `networkx`, `requests`, `django`, `fastapi`, `tenacity`.
 
 ## Debug prints
 
@@ -540,8 +478,7 @@ declaring done, unless they're an intentional CLI status line.
 - [ ] Dispatch dicts instead of `if/elif` ladders.
 - [ ] `pathlib.Path.read_text().splitlines()` for input.
 - [ ] `assert cond, f'{var=}'` for invariants; `raise ValueError(...)` for
-  user-facing errors.
+      user-facing errors.
 - [ ] `len(x) > 0` / `len(x) == 0` consistently.
 - [ ] Imports: three groups, parenthesised with trailing comma, alphabetical.
 - [ ] British spelling in names and comments (`neighbour`, `colour`).
-- [ ] No numpy / pandas unless discussed.

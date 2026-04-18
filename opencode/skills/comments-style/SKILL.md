@@ -105,7 +105,7 @@ for connection in connections:
 For 2D / 3D layouts, puzzle shapes, state machines, or derivations, include an
 inline ASCII picture. This is one of the clearest signature moves of the user.
 
-Example from `Primal2dBoats/main.py`:
+Example:
 
 ```
 # Drawing outline of the whole box.
@@ -140,7 +140,7 @@ def when_intersects(p_1: int, v_1: int, p_2: int, v_2: int) -> int | None:
 
 Do not half-heartedly strip these out when tidying.
 
-## Echoing the input / problem statement (AoC)
+## Echoing the input / problem statement
 
 When solving a problem with a textual spec, quote one or two example lines of
 the input near the parser:
@@ -184,16 +184,13 @@ skills.
 
 ## Elixir typespecs
 
-- In `lib/` every struct has `@type t :: %__MODULE__{...}`, every function has
-  a `@spec`, and persistent structs get `@derive Jason.Encoder`.
-- In day files (`YEAR/DAY/main.ex`) specs and docs are **not** used. Don't
-  add them gratuitously.
+- Every struct has `@type t :: %__MODULE__{...}`, every function has
+  a `@spec`, and persistent structs (that are to be serialised) get `@derive Jason.Encoder`.
 
 ## Lua documentation
 
 - `--` line comments only. **No block comments `--[[ ]]`**.
-- **No EmmyLua / `---@param` annotations** in user code. The `api/` folder has
-  LSP stubs; keep them out of `src/`.
+- **No EmmyLua / `---@param` annotations** in user code.
 - Moderate density: a comment per non-obvious method or block, none above
   trivial lines.
 

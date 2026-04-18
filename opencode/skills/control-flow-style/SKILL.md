@@ -20,7 +20,6 @@ that bail out fast. Do not collect them into a single `if` or nest them.
 Python:
 
 ```python
-# /Users/malhavok/Coding/Python/AdventOfCode/tasks/2024/day12/main.py:28-39
 def build_island(grid: Grid2D, tile: Tile2D) -> set[Tile2D]:
     island = set()
     to_visit = [tile]
@@ -45,7 +44,6 @@ def build_island(grid: Grid2D, tile: Tile2D) -> set[Tile2D]:
 Lua - notice how several single-line guards run one after the other:
 
 ```lua
--- src/tiles/matcher.lua
 function Matcher:setCursorPosition(x_pos, y_pos)
     local new_tile = board:getTileAtPosition(x_pos, y_pos)
     if new_tile == self.current_tile then
@@ -98,7 +96,6 @@ When the branching selects among N similar operations, build a mapping from the
 discriminator to a handler and index into it. Avoid ladders of `elif`.
 
 ```python
-# /Users/malhavok/Coding/Python/AdventOfCode/aoc.py
 command_fun = {
     'year': year_command,
     'day': day_command,
@@ -115,7 +112,6 @@ Even better - derive the mapping metaprogrammatically when the names are
 regular:
 
 ```python
-# /Users/malhavok/Coding/Python/AdventOfCode/tasks/2024/day17/main.py
 OPCODE_FUN: dict[Opcode, Callable[[int, Registers, list[int]], OpcodeResult]] = {
     opcode: globals()[f'apply_{opcode.name.lower()}']
     for opcode in Opcode
@@ -127,7 +123,7 @@ PYTHON_OPERATION = {Operation.AND: '&', Operation.OR: '|', Operation.XOR: '^'}
 ```
 
 Elixir's equivalent is **multi-clause functions on atoms / binary prefixes** -
-see elixir-aoc-style skill.
+see elixir-style skill.
 
 ## No `cond`, rarely `switch`
 
@@ -135,8 +131,7 @@ see elixir-aoc-style skill.
   with guards, or use `case`. This is a hard rule in this codebase.
 - Python: no `match` / `case` statements found in the corpus. Dispatch dict is
   preferred.
-- Lua: no dispatch tables in the current Love2D code, but also no long
-  `elseif` chains.
+- Lua: no long `elseif` chains.
 
 ## Early returns over `else`
 
@@ -213,7 +208,7 @@ When a function takes an optional callback:
 - Allow `None` / `nil`.
 - Guard before calling: `if callback is not None: callback()`.
 
-Lua (every tween method in `src/tweens/`):
+Lua (every tween method):
 
 ```lua
 function ICanBounce:show(callback)
@@ -229,9 +224,7 @@ end
 ## Cancel-then-start idiom
 
 Any long-running effect that can be triggered twice (tween, debounced timer,
-in-flight task) must cancel the previous one before starting a new one. The
-user copies this pattern rather than extracting a helper - do the same unless
-asked to refactor it.
+in-flight task) must cancel the previous one before starting a new one.
 
 ## State flags on `self`
 
