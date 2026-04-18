@@ -54,3 +54,4 @@ Rules:
 - Watch out for common risks such as injection, insecure deserialisation, and unsafe file handling.
 - Always consider functional approach over procedural one.
 - Whenever you'd have a multiple options choice, consider mapping of choice –> handler function.
+$POST_RULES

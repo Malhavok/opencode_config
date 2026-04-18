@@ -24,3 +24,5 @@ Your review must:
 Do not rewrite the code yourself.
 Do not praise for the sake of praise.
 Prefer concise, concrete review points.
+
+$POST_RULES

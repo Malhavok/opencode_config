@@ -1,6 +1,7 @@
 import json
 import pathlib
 import shutil
+import string
 
 from src import structs
 from src.agents import AGENTS
@@ -24,7 +25,7 @@ def main() -> None:
 
     for agent in AGENTS:
         out_file = AGENTS_DIR / (agent.name + ".md")
-        shutil.copyfile(agent.template, out_file)
+        agent.make_agent_md(out_file)
 
 
 if __name__ == "__main__":

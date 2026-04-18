@@ -1,5 +1,6 @@
 import enum
 import pathlib
+from audioop import add
 
 from .consts import DEVELOPER_BASH, SAFE_BASH, Approval
 from .structs import Agent, Mode, Permissions
@@ -29,6 +30,7 @@ def make_architect(
     model: str,
     developers: list[str],
     reviewers: list[str],
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
@@ -53,6 +55,7 @@ def make_developer(
     name: str,
     model: str,
     reviewers: list[str],
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
@@ -76,6 +79,7 @@ def make_reviewer(
     name: str,
     model: str,
     behaviour_template: ReviewerTemplate,
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
