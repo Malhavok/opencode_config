@@ -54,4 +54,15 @@ Rules:
 - Watch out for common risks such as injection, insecure deserialisation, and unsafe file handling.
 - Always consider functional approach over procedural one.
 - Whenever you'd have a multiple options choice, consider mapping of choice –> handler function.
+- Follow test-first discipline: write the failing test first, run it and confirm it fails for the right reason, then write the minimal code to make it pass, then refactor while keeping it green.
+- Do not write production code that is not driven by a failing test or an explicit step in the plan.
+- When debugging, never guess. Follow a systematic loop: reproduce the bug with a minimal case, isolate the fault by binary search (halve the search space until localised), form a concrete testable hypothesis backed by evidence, apply the smallest fix, then verify with the reproduction case, related tests, and the full suite.
+- After fixing a bug, add a regression test so the same failure cannot come back silently.
+- If a fix does not work after two focused attempts, stop and escalate with a concise summary of what was tried and what is still unknown.
+- Test at layer boundaries: unit-test pure logic, stub dependencies at service boundaries, and use integration tests only for real IO (HTTP, database, events).
+- Do not test framework internals, third-party libraries, trivial getters and setters, or private implementation details; test through public APIs.
+- Prefer strategic coverage over a blanket 100%: cover validation, business rules, orchestration, error paths, and critical journeys hard; leave trivial mappings lightly tested.
+- When the user reverts or narrows the work, drop the previous approach completely and follow the new scope without asking "are you sure?".
+- Keep the diff focused: touch only files that the task requires, and remove any debug code, stray prints, or temporary hacks before declaring done.
+- After implementation, re-read the diff against the base branch as if reviewing someone else's work before asking reviewers.
 

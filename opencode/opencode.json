@@ -105,6 +105,87 @@
         }
       }
     },
+    "medium-reviewer-strict-diff": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/gpt-5.3-codex",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "medium-reviewer-alternative": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/gemini-3-flash",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "medium-reviewer-senior": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/claude-opus-4-7",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
     "free-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
@@ -256,9 +337,9 @@
         },
         "task": {
           "*": "deny",
-          "pro-reviewer-strict-diff": "allow",
-          "pro-reviewer-alternative": "allow",
-          "pro-reviewer-senior": "allow"
+          "medium-reviewer-strict-diff": "allow",
+          "medium-reviewer-alternative": "allow",
+          "medium-reviewer-senior": "allow"
         }
       }
     },
@@ -294,9 +375,9 @@
         },
         "task": {
           "*": "deny",
-          "pro-reviewer-strict-diff": "allow",
-          "pro-reviewer-alternative": "allow",
-          "pro-reviewer-senior": "allow"
+          "medium-reviewer-strict-diff": "allow",
+          "medium-reviewer-alternative": "allow",
+          "medium-reviewer-senior": "allow"
         }
       }
     },
@@ -424,11 +505,11 @@
         },
         "task": {
           "*": "deny",
+          "cheap-developer": "allow",
           "medium-developer": "allow",
-          "pro-developer": "allow",
-          "pro-reviewer-strict-diff": "allow",
-          "pro-reviewer-alternative": "allow",
-          "pro-reviewer-senior": "allow"
+          "medium-reviewer-strict-diff": "allow",
+          "medium-reviewer-alternative": "allow",
+          "medium-reviewer-senior": "allow"
         }
       }
     },
@@ -458,9 +539,9 @@
           "*": "deny",
           "free-developer": "allow",
           "cheap-developer": "allow",
-          "pro-reviewer-strict-diff": "allow",
-          "pro-reviewer-alternative": "allow",
-          "pro-reviewer-senior": "allow"
+          "medium-reviewer-strict-diff": "allow",
+          "medium-reviewer-alternative": "allow",
+          "medium-reviewer-senior": "allow"
         }
       }
     }
