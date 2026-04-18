@@ -17,6 +17,8 @@ REVIEWER_ALTERNATIVE_TEMPLATE = pathlib.Path(
 )
 REVIEWER_SENIOR_TEMPLATE = pathlib.Path("./templates/reviewer-senior.md")
 
+CAVEMAN_TEMPLATE = pathlib.Path("./templates/caveman.md")
+
 
 class ReviewerTemplate(enum.Enum):
     STRICT_DIFF = REVIEWER_STRICT_DIFF_TEMPLATE
@@ -29,6 +31,7 @@ def make_architect(
     model: str,
     developers: list[str],
     reviewers: list[str],
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
@@ -46,6 +49,7 @@ def make_architect(
             ),
         ),
         template=ARCHITECT_TEMPLATE,
+        additional_rules=additional_rules,
     )
 
 
@@ -53,6 +57,7 @@ def make_developer(
     name: str,
     model: str,
     reviewers: list[str],
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
@@ -69,6 +74,7 @@ def make_developer(
             ),
         ),
         template=DEVELOPER_TEMPLATE,
+        additional_rules=additional_rules,
     )
 
 
@@ -76,6 +82,7 @@ def make_reviewer(
     name: str,
     model: str,
     behaviour_template: ReviewerTemplate,
+    additional_rules: list[pathlib.Path] | None = None,
 ) -> Agent:
     return Agent(
         name=name,
@@ -89,4 +96,5 @@ def make_reviewer(
             task=DEFAULT_TASK,
         ),
         template=behaviour_template.value,
+        additional_rules=additional_rules,
     )

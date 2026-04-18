@@ -1,5 +1,12 @@
 import enum
 
+PRO_PREFIX = "pro-"
+MEDIUM_PREFIX = "medium-"
+CHEAP_PREFIX = "cheap-"
+FREE_PREFIX = "free-"
+
+PRICE_PREFIX_ORDER = [FREE_PREFIX, CHEAP_PREFIX, MEDIUM_PREFIX, PRO_PREFIX]
+
 
 class Approval(enum.StrEnum):
     ALLOW = "allow"

@@ -1,12 +1,11 @@
 import json
 import pathlib
-import shutil
 
 from src import structs
-from src.agents import AGENTS
+from src.agents import AGENTS, TOP_LOGIC_MODEL
 from src.consts import SAFE_BASH, Approval
 
-DEFAULT_MODEL = "opencode/claude-opus-4-6"
+DEFAULT_MODEL = TOP_LOGIC_MODEL
 OPENCODE_FILE = pathlib.Path("./opencode/opencode.json")
 AGENTS_DIR = pathlib.Path("./opencode/agents/")
 
@@ -24,7 +23,7 @@ def main() -> None:
 
     for agent in AGENTS:
         out_file = AGENTS_DIR / (agent.name + ".md")
-        shutil.copyfile(agent.template, out_file)
+        agent.make_agent_md(out_file)
 
 
 if __name__ == "__main__":
