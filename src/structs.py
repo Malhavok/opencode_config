@@ -4,7 +4,7 @@ import pathlib
 import string
 from typing import Any, Self
 
-from .consts import PRICE_PREFIX_ORDER, Approval
+from .consts import PRICE_PREFIX_ORDER, Approval, Variants
 
 
 class Mode(enum.StrEnum):
@@ -46,6 +46,7 @@ class Agent:
     mode: Mode
     description: str
     model: str
+    variant: Variants
     permission: Permissions
     template: pathlib.Path
     additional_rules: list[pathlib.Path] | None

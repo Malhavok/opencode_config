@@ -1,7 +1,7 @@
 import enum
 import pathlib
 
-from .consts import DEVELOPER_BASH, SAFE_BASH, Approval
+from .consts import DEVELOPER_BASH, SAFE_BASH, Approval, Variants
 from .structs import Agent, Mode, Permissions
 
 DEFAULT_TASK = {
@@ -32,12 +32,14 @@ def make_architect(
     developers: list[str],
     reviewers: list[str],
     additional_rules: list[pathlib.Path] | None = None,
+    variant: Variants = Variants.HIGH,
 ) -> Agent:
     return Agent(
         name=name,
         mode=Mode.PRIMARY,
         description="Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
         model=model,
+        variant=variant,
         permission=Permissions(
             edit=Approval.ALLOW,
             webfetch=Approval.ASK,
@@ -58,12 +60,14 @@ def make_developer(
     model: str,
     reviewers: list[str],
     additional_rules: list[pathlib.Path] | None = None,
+    variant: Variants = Variants.HIGH,
 ) -> Agent:
     return Agent(
         name=name,
         mode=Mode.SUBAGENT,
         description="Implements only the approved plan, then asks reviewers to review the diff.",
         model=model,
+        variant=variant,
         permission=Permissions(
             edit=Approval.ALLOW,
             webfetch=Approval.ASK,
@@ -83,12 +87,14 @@ def make_reviewer(
     model: str,
     behaviour_template: ReviewerTemplate,
     additional_rules: list[pathlib.Path] | None = None,
+    variant: Variants = Variants.HIGH,
 ) -> Agent:
     return Agent(
         name=name,
         mode=Mode.SUBAGENT,
         description="Reviewer with given template.",
         model=model,
+        variant=variant,
         permission=Permissions(
             edit=Approval.DENY,
             webfetch=Approval.DENY,

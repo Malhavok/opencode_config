@@ -8,6 +8,10 @@ FREE_PREFIX = "free-"
 PRICE_PREFIX_ORDER = [FREE_PREFIX, CHEAP_PREFIX, MEDIUM_PREFIX, PRO_PREFIX]
 
 
+class Variants(enum.StrEnum):
+    HIGH = "high"
+
+
 class Approval(enum.StrEnum):
     ALLOW = "allow"
     ASK = "ask"
