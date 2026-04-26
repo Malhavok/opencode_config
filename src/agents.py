@@ -19,8 +19,6 @@ TOP_STRICT_REVIEW_MODEL = "opencode/gpt-5.5"
 TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.1-pro"
 
 MEDIUM_CODE_MODEL = "opencode/qwen3.6-plus"
-# Ollama model that doesn't require subscription.
-CHEAP_CODE_MODEL = "ollama/deepseek-v3.2:cloud"
 
 FREE_MODEL_1 = "opencode/big-pickle"
 FREE_MODEL_2 = "opencode/minimax-m2.5-free"
@@ -33,7 +31,6 @@ FREE_ARCHITECT_NAME = FREE_PREFIX + ARCHITECT_NAME
 
 PRO_DEVELOPER = PRO_PREFIX + DEVELOPER_NAME
 MEDIUM_DEVELOPER = MEDIUM_PREFIX + DEVELOPER_NAME
-CHEAP_DEVELOPER = CHEAP_PREFIX + DEVELOPER_NAME
 FREE_DEVELOPER = FREE_PREFIX + DEVELOPER_NAME
 
 
@@ -121,14 +118,6 @@ DEVELOPERS = [
         CAVEMAN_REVIEWERS,
         additional_rules=[CAVEMAN_TEMPLATE],
     ),
-    # Cheap developer.
-    # Using top reviewers in caveman mode to reduce the cost.
-    make_developer(
-        CHEAP_DEVELOPER,
-        CHEAP_CODE_MODEL,
-        CAVEMAN_REVIEWERS,
-        additional_rules=[CAVEMAN_TEMPLATE],
-    ),
     # Free developer.
     # Only this one is using free reviewers,
     # the rest try to do the best work possible.
@@ -160,15 +149,15 @@ ARCHITECTS = [
     make_architect(
         MEDIUM_ARCHITECT_NAME,
         TOP_LOGIC_MODEL,
-        [CHEAP_DEVELOPER, MEDIUM_DEVELOPER],
+        [MEDIUM_DEVELOPER],
         CAVEMAN_REVIEWERS,
         additional_rules=[CAVEMAN_TEMPLATE],
     ),
     # Cheap architect, spends least money, medium effort plan.
     make_architect(
         CHEAP_ARCHITECT_NAME,
-        TOP_CODE_MODEL,
-        [FREE_DEVELOPER, CHEAP_DEVELOPER],
+        MEDIUM_CODE_MODEL,
+        [FREE_DEVELOPER, MEDIUM_DEVELOPER],
         CAVEMAN_REVIEWERS,
         additional_rules=[CAVEMAN_TEMPLATE],
     ),

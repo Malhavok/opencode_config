@@ -354,45 +354,6 @@
         }
       }
     },
-    "cheap-developer": {
-      "mode": "subagent",
-      "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "ollama/deepseek-v3.2:cloud",
-      "variant": "high",
-      "permission": {
-        "edit": "allow",
-        "webfetch": "ask",
-        "bash": {
-          "mkdir *": "allow",
-          "npm test*": "allow",
-          "pnpm test*": "allow",
-          "pytest*": "allow",
-          "go test*": "allow",
-          "cargo test*": "allow",
-          "mix *": "allow",
-          "docker compose *": "allow",
-          "git status*": "allow",
-          "git diff*": "allow",
-          "grep *": "allow",
-          "rg *": "allow",
-          "find *": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "diff *": "allow",
-          "cat *": "allow",
-          "wc *": "allow",
-          "echo *": "allow"
-        },
-        "task": {
-          "*": "deny",
-          "medium-reviewer-strict-diff": "allow",
-          "medium-reviewer-alternative": "allow",
-          "medium-reviewer-senior": "allow"
-        }
-      }
-    },
     "free-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
@@ -521,7 +482,6 @@
         },
         "task": {
           "*": "deny",
-          "cheap-developer": "allow",
           "medium-developer": "allow",
           "medium-reviewer-strict-diff": "allow",
           "medium-reviewer-alternative": "allow",
@@ -532,7 +492,7 @@
     "cheap-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/claude-sonnet-4-6",
+      "model": "opencode/qwen3.6-plus",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -555,7 +515,7 @@
         "task": {
           "*": "deny",
           "free-developer": "allow",
-          "cheap-developer": "allow",
+          "medium-developer": "allow",
           "medium-reviewer-strict-diff": "allow",
           "medium-reviewer-alternative": "allow",
           "medium-reviewer-senior": "allow"
