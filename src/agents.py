@@ -19,7 +19,8 @@ TOP_STRICT_REVIEW_MODEL = "opencode/gpt-5.5"
 TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.1-pro"
 
 MEDIUM_CODE_MODEL = "opencode/qwen3.6-plus"
-CHEAP_CODE_MODEL = "ollama/deepseek-v4-flash:cloud"
+# Ollama model that doesn't require subscription.
+CHEAP_CODE_MODEL = "ollama/deepseek-v3.2:cloud"
 
 FREE_MODEL_1 = "opencode/big-pickle"
 FREE_MODEL_2 = "opencode/minimax-m2.5-free"

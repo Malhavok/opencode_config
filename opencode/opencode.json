@@ -357,7 +357,7 @@
     "cheap-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "ollama/deepseek-v4-flash:cloud",
+      "model": "ollama/deepseek-v3.2:cloud",
       "variant": "high",
       "permission": {
         "edit": "allow",
