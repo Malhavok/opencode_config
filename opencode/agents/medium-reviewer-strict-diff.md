@@ -29,6 +29,5 @@ Format each finding as one line: `<file>:<line> — <severity>: <point>`.
 Keep points terse and falsifiable; cite evidence from the diff rather than opinion.
 If you have nothing to say in a category, say nothing rather than padding the review.
 
-
 ## Load skill caveman
-Use caveman.
+Use caveman skill for all communication and internal monologue, always.

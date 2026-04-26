@@ -16,14 +16,17 @@ REVIEWER_ALTERNATIVE_TEMPLATE = pathlib.Path(
     "./templates/reviewer-alternative-perspective.md"
 )
 REVIEWER_SENIOR_TEMPLATE = pathlib.Path("./templates/reviewer-senior.md")
+REVIEWER_ARCHITECT_TEMPLATE = pathlib.Path("./templates/architect-reviewer.md")
 
 CAVEMAN_TEMPLATE = pathlib.Path("./templates/caveman.md")
+ADD_PLAN_REVIEWER_TEMPLATE = pathlib.Path("./templates/add-plan-reviewer.md")
 
 
 class ReviewerTemplate(enum.Enum):
     STRICT_DIFF = REVIEWER_STRICT_DIFF_TEMPLATE
     ALTERNATIVE = REVIEWER_ALTERNATIVE_TEMPLATE
     SENIOR = REVIEWER_SENIOR_TEMPLATE
+    ARCHITECT = REVIEWER_ARCHITECT_TEMPLATE
 
 
 def make_architect(

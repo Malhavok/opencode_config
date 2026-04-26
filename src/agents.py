@@ -1,5 +1,6 @@
 from .consts import CHEAP_PREFIX, FREE_PREFIX, MEDIUM_PREFIX, PRO_PREFIX
 from .roles import (
+    ADD_PLAN_REVIEWER_TEMPLATE,
     CAVEMAN_TEMPLATE,
     ReviewerTemplate,
     make_architect,
@@ -12,6 +13,7 @@ DEVELOPER_NAME = "developer"
 STRICT_REVIEWER_NAME = "reviewer-strict-diff"
 ALTERNATIVE_REVIEWER_NAME = "reviewer-alternative"
 SENIOR_REVIEWER_NAME = "reviewer-senior"
+ARCHITECT_REVIEWER_NAME = "architect-reviewer"
 
 TOP_LOGIC_MODEL = "opencode/claude-opus-4-7"
 TOP_CODE_MODEL = "opencode/claude-sonnet-4-6"
@@ -51,6 +53,8 @@ FREE_REVIEWERS = [
     FREE_PREFIX + ALTERNATIVE_REVIEWER_NAME,
     FREE_PREFIX + SENIOR_REVIEWER_NAME,
 ]
+
+PRO_ARCHITECT_REVIEWER_NAME = PRO_PREFIX + ARCHITECT_REVIEWER_NAME
 
 REVIEWERS = [
     # Top reviewers, spare no expense.
@@ -100,6 +104,13 @@ REVIEWERS = [
     ),
     make_reviewer(
         FREE_PREFIX + SENIOR_REVIEWER_NAME, FREE_MODEL_3, ReviewerTemplate.SENIOR
+    ),
+    # Architect reviewer.
+    make_reviewer(
+        PRO_ARCHITECT_REVIEWER_NAME,
+        TOP_LOGIC_MODEL,
+        ReviewerTemplate.ARCHITECT,
+        additional_rules=[CAVEMAN_TEMPLATE],
     ),
 ]
 
@@ -158,8 +169,8 @@ ARCHITECTS = [
         CHEAP_ARCHITECT_NAME,
         MEDIUM_CODE_MODEL,
         [FREE_DEVELOPER, MEDIUM_DEVELOPER],
-        CAVEMAN_REVIEWERS,
-        additional_rules=[CAVEMAN_TEMPLATE],
+        CAVEMAN_REVIEWERS + [PRO_ARCHITECT_REVIEWER_NAME],
+        additional_rules=[ADD_PLAN_REVIEWER_TEMPLATE, CAVEMAN_TEMPLATE],
     ),
 ]
 

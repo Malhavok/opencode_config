@@ -23,6 +23,5 @@ Mark each point as:
 Format each finding as one line: `<file>:<line> — <severity>: <point>`.
 If the whole approach has a better alternative, state it in one paragraph with the trade-off, not a rewrite.
 
-
 ## Load skill caveman
-Use caveman.
+Use caveman skill for all communication and internal monologue, always.

@@ -276,6 +276,34 @@
         }
       }
     },
+    "pro-architect-reviewer": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "opencode/claude-opus-4-7",
+      "variant": "high",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
     "pro-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
@@ -518,7 +546,8 @@
           "medium-developer": "allow",
           "medium-reviewer-strict-diff": "allow",
           "medium-reviewer-alternative": "allow",
-          "medium-reviewer-senior": "allow"
+          "medium-reviewer-senior": "allow",
+          "pro-architect-reviewer": "allow"
         }
       }
     }
