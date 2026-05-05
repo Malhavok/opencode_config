@@ -77,6 +77,12 @@ class OpenCode:
         base_dict = dataclasses.asdict(self)
         base_dict["$schema"] = "https://opencode.ai/config.json"
 
+        # Silly install for context-mode. This should be done better in the future.
+        base_dict["mcp"] = {
+            "context-mode": {"type": "local", "command": ["context-mode"]}
+        }
+        base_dict["plugin"] = ["context-mode"]
+
         for agent_dict in base_dict["agent"].values():
             del agent_dict["name"]
             del agent_dict["template"]

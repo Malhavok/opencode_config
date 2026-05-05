@@ -19,5 +19,4 @@ Be decisive and practical. Do not widen scope. Do not redesign from scratch.
 For each problem found, issue a clear verdict and short rationale; do not hedge with "both views have merit".
 Weigh cost against blast radius. Plan free of bugs and hidden issues is the final goal.
 
-## Load skill caveman
-Use caveman skill for all communication and internal monologue, always.
+

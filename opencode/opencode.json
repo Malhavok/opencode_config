@@ -108,90 +108,6 @@
         }
       }
     },
-    "medium-reviewer-strict-diff": {
-      "mode": "subagent",
-      "description": "Reviewer with given template.",
-      "model": "opencode/gpt-5.5",
-      "variant": "high",
-      "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
-        "bash": {
-          "git status*": "allow",
-          "git diff*": "allow",
-          "grep *": "allow",
-          "rg *": "allow",
-          "find *": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "diff *": "allow",
-          "cat *": "allow",
-          "wc *": "allow",
-          "echo *": "allow"
-        },
-        "task": {
-          "*": "deny"
-        }
-      }
-    },
-    "medium-reviewer-alternative": {
-      "mode": "subagent",
-      "description": "Reviewer with given template.",
-      "model": "opencode/gemini-3.1-pro",
-      "variant": "high",
-      "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
-        "bash": {
-          "git status*": "allow",
-          "git diff*": "allow",
-          "grep *": "allow",
-          "rg *": "allow",
-          "find *": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "diff *": "allow",
-          "cat *": "allow",
-          "wc *": "allow",
-          "echo *": "allow"
-        },
-        "task": {
-          "*": "deny"
-        }
-      }
-    },
-    "medium-reviewer-senior": {
-      "mode": "subagent",
-      "description": "Reviewer with given template.",
-      "model": "opencode/claude-opus-4-7",
-      "variant": "high",
-      "permission": {
-        "edit": "deny",
-        "webfetch": "deny",
-        "bash": {
-          "git status*": "allow",
-          "git diff*": "allow",
-          "grep *": "allow",
-          "rg *": "allow",
-          "find *": "allow",
-          "ls *": "allow",
-          "pwd": "allow",
-          "head *": "allow",
-          "tail *": "allow",
-          "diff *": "allow",
-          "cat *": "allow",
-          "wc *": "allow",
-          "echo *": "allow"
-        },
-        "task": {
-          "*": "deny"
-        }
-      }
-    },
     "free-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
@@ -376,9 +292,9 @@
         },
         "task": {
           "*": "deny",
-          "medium-reviewer-strict-diff": "allow",
-          "medium-reviewer-alternative": "allow",
-          "medium-reviewer-senior": "allow"
+          "pro-reviewer-strict-diff": "allow",
+          "pro-reviewer-alternative": "allow",
+          "pro-reviewer-senior": "allow"
         }
       }
     },
@@ -511,9 +427,9 @@
         "task": {
           "*": "deny",
           "medium-developer": "allow",
-          "medium-reviewer-strict-diff": "allow",
-          "medium-reviewer-alternative": "allow",
-          "medium-reviewer-senior": "allow"
+          "pro-reviewer-strict-diff": "allow",
+          "pro-reviewer-alternative": "allow",
+          "pro-reviewer-senior": "allow"
         }
       }
     },
@@ -544,13 +460,20 @@
           "*": "deny",
           "free-developer": "allow",
           "medium-developer": "allow",
-          "medium-reviewer-strict-diff": "allow",
-          "medium-reviewer-alternative": "allow",
-          "medium-reviewer-senior": "allow",
+          "pro-reviewer-strict-diff": "allow",
+          "pro-reviewer-alternative": "allow",
+          "pro-reviewer-senior": "allow",
           "pro-architect-reviewer": "allow"
         }
       }
     }
   },
-  "$schema": "https://opencode.ai/config.json"
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    "context-mode": {
+      "type": "local",
+      "command": ["context-mode"]
+    }
+  },
+  "plugin": ["context-mode"]
 }

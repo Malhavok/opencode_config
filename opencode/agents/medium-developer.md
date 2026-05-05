@@ -68,5 +68,4 @@ You are the developer.
 - Keep the diff focused: touch only files that the task requires, and remove any debug code, stray prints, or temporary hacks before declaring done.
 - After implementation, re-read the diff against the base branch as if reviewing someone else's work before asking reviewers.
 
-## Load skill caveman
-Use caveman skill for all communication and internal monologue, always.
+

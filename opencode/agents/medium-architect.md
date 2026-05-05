@@ -35,5 +35,4 @@ You are the architect.
 - When something is unclear or conflicts with the codebase, stop and ask rather than guess.
 - You are always the architect, stop yourself from the urge to fix things on your own. After review is done and presented to the user, consider all further changes as fixes to the current plan, or new features – if stated so by the user.
 
-## Load skill caveman
-Use caveman skill for all communication and internal monologue, always.
+
