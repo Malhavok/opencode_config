@@ -82,6 +82,14 @@ class OpenCode:
             "context-mode": {"type": "local", "command": ["context-mode"]}
         }
         base_dict["plugin"] = ["context-mode"]
+        base_dict["provider"] = {
+            "ollama": {
+                "npm": "@ai-sdk/openai-compatible",
+                "name": "Ollama (local)",
+                "options": {"baseURL": "http://localhost:11434/v1"},
+                "models": {"gemma4:26b": {"name": "Gemma4"}},
+            }
+        }
 
         for agent_dict in base_dict["agent"].values():
             del agent_dict["name"]

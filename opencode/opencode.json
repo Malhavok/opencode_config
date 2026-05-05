@@ -220,6 +220,90 @@
         }
       }
     },
+    "local-reviewer-strict-diff": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "ollama/gemma4:26b",
+      "variant": "high",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "local-reviewer-alternative": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "ollama/gemma4:26b",
+      "variant": "high",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
+    "local-reviewer-senior": {
+      "mode": "subagent",
+      "description": "Reviewer with given template.",
+      "model": "ollama/gemma4:26b",
+      "variant": "high",
+      "permission": {
+        "edit": "deny",
+        "webfetch": "deny",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny"
+        }
+      }
+    },
     "pro-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
@@ -253,8 +337,8 @@
         },
         "task": {
           "*": "deny",
-          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-alternative": "allow",
+          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-senior": "allow"
         }
       }
@@ -292,8 +376,8 @@
         },
         "task": {
           "*": "deny",
-          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-alternative": "allow",
+          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-senior": "allow"
         }
       }
@@ -301,7 +385,7 @@
     "free-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "opencode/big-pickle",
+      "model": "ollama/gemma4:26b",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -331,9 +415,9 @@
         },
         "task": {
           "*": "deny",
-          "free-reviewer-strict-diff": "allow",
-          "free-reviewer-alternative": "allow",
-          "free-reviewer-senior": "allow"
+          "local-reviewer-alternative": "allow",
+          "local-reviewer-strict-diff": "allow",
+          "local-reviewer-senior": "allow"
         }
       }
     },
@@ -363,8 +447,8 @@
         "task": {
           "*": "deny",
           "pro-developer": "allow",
-          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-alternative": "allow",
+          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-senior": "allow"
         }
       }
@@ -395,8 +479,8 @@
         "task": {
           "*": "deny",
           "free-developer": "allow",
-          "free-reviewer-strict-diff": "allow",
           "free-reviewer-alternative": "allow",
+          "free-reviewer-strict-diff": "allow",
           "free-reviewer-senior": "allow"
         }
       }
@@ -427,8 +511,8 @@
         "task": {
           "*": "deny",
           "medium-developer": "allow",
-          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-alternative": "allow",
+          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-senior": "allow"
         }
       }
@@ -460,10 +544,42 @@
           "*": "deny",
           "free-developer": "allow",
           "medium-developer": "allow",
-          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-alternative": "allow",
+          "pro-reviewer-strict-diff": "allow",
           "pro-reviewer-senior": "allow",
           "pro-architect-reviewer": "allow"
+        }
+      }
+    },
+    "local-architect": {
+      "mode": "primary",
+      "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
+      "model": "ollama/gemma4:26b",
+      "variant": "high",
+      "permission": {
+        "edit": "allow",
+        "webfetch": "ask",
+        "bash": {
+          "git status*": "allow",
+          "git diff*": "allow",
+          "grep *": "allow",
+          "rg *": "allow",
+          "find *": "allow",
+          "ls *": "allow",
+          "pwd": "allow",
+          "head *": "allow",
+          "tail *": "allow",
+          "diff *": "allow",
+          "cat *": "allow",
+          "wc *": "allow",
+          "echo *": "allow"
+        },
+        "task": {
+          "*": "deny",
+          "local-developer": "allow",
+          "local-reviewer-alternative": "allow",
+          "local-reviewer-strict-diff": "allow",
+          "local-reviewer-senior": "allow"
         }
       }
     }
@@ -472,8 +588,26 @@
   "mcp": {
     "context-mode": {
       "type": "local",
-      "command": ["context-mode"]
+      "command": [
+        "context-mode"
+      ]
     }
   },
-  "plugin": ["context-mode"]
+  "plugin": [
+    "context-mode"
+  ],
+  "provider": {
+    "ollama": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "Ollama (local)",
+      "options": {
+        "baseURL": "http://localhost:11434/v1"
+      },
+      "models": {
+        "gemma4:26b": {
+          "name": "Gemma4"
+        }
+      }
+    }
+  }
 }
