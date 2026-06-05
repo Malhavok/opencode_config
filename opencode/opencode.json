@@ -1,5 +1,5 @@
 {
-  "model": "opencode/claude-opus-4-7",
+  "model": "opencode/claude-opus-4-8",
   "permission": {
     "edit": "ask",
     "webfetch": "ask",
@@ -55,7 +55,7 @@
     "pro-reviewer-alternative": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/gemini-3.1-pro",
+      "model": "opencode/gemini-3.5-flash",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -83,7 +83,7 @@
     "pro-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/claude-opus-4-7",
+      "model": "opencode/claude-opus-4-8",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -195,7 +195,7 @@
     "pro-architect-reviewer": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/claude-opus-4-7",
+      "model": "opencode/claude-opus-4-8",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -223,7 +223,7 @@
     "local-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:26b",
+      "model": "ollama/gemma4:26b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -251,7 +251,7 @@
     "local-reviewer-alternative": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:26b",
+      "model": "ollama/qwen3.6:27b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -279,7 +279,7 @@
     "local-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:26b",
+      "model": "ollama/gemma4:26b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -307,7 +307,7 @@
     "pro-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "opencode/claude-sonnet-4-6",
+      "model": "opencode/qwen3.7-plus",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -385,7 +385,7 @@
     "free-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "ollama/gemma4:26b",
+      "model": "ollama/qwen3.6:27b-mlx",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -424,7 +424,7 @@
     "pro-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/claude-opus-4-7",
+      "model": "opencode/claude-opus-4-8",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -488,7 +488,7 @@
     "medium-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/claude-opus-4-7",
+      "model": "opencode/claude-opus-4-8",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -554,7 +554,7 @@
     "local-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "ollama/gemma4:26b",
+      "model": "ollama/gemma4:26b-mlx",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -598,14 +598,17 @@
   ],
   "provider": {
     "ollama": {
-      "npm": "@ai-sdk/openai-compatible",
       "name": "Ollama (local)",
+      "npm": "@ai-sdk/openai-compatible",
       "options": {
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "gemma4:26b": {
-          "name": "Gemma4"
+        "gemma4:26b-mlx": {
+          "name": "Gemini"
+        },
+        "qwen3.6:27b-mlx": {
+          "name": "Qwen"
         }
       }
     }

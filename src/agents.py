@@ -20,10 +20,10 @@ REVIEWERS_NAMES = [
     SENIOR_REVIEWER_NAME,
 ]
 
-TOP_LOGIC_MODEL = "opencode/claude-opus-4-7"
-TOP_CODE_MODEL = "opencode/claude-sonnet-4-6"
+TOP_LOGIC_MODEL = "opencode/claude-opus-4-8"
+TOP_CODE_MODEL = "opencode/qwen3.7-plus"
 TOP_STRICT_REVIEW_MODEL = "opencode/gpt-5.5"
-TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.1-pro"
+TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.5-flash"
 
 MEDIUM_CODE_MODEL = "opencode/qwen3.6-plus"
 
@@ -31,7 +31,8 @@ FREE_MODEL_1 = "opencode/big-pickle"
 FREE_MODEL_2 = "opencode/minimax-m2.5-free"
 FREE_MODEL_3 = "opencode/nemotron-3-super-free"
 
-LOCAL_MODEL = "ollama/gemma4:26b"
+LOCAL_ARCHITECT_MODEL = "ollama/gemma4:26b-mlx"
+LOCAL_CODER_MODEL = "ollama/qwen3.6:27b-mlx"
 
 PRO_ARCHITECT_NAME = PRO_PREFIX + ARCHITECT_NAME
 MEDIUM_ARCHITECT_NAME = MEDIUM_PREFIX + ARCHITECT_NAME
@@ -91,16 +92,18 @@ REVIEWERS = [
     # Local reviewers.
     make_reviewer(
         LOCAL_PREFIX + STRICT_REVIEWER_NAME,
-        LOCAL_MODEL,
+        LOCAL_ARCHITECT_MODEL,
         ReviewerTemplate.STRICT_DIFF,
     ),
     make_reviewer(
         LOCAL_PREFIX + ALTERNATIVE_REVIEWER_NAME,
-        LOCAL_MODEL,
+        LOCAL_CODER_MODEL,
         ReviewerTemplate.ALTERNATIVE,
     ),
     make_reviewer(
-        LOCAL_PREFIX + SENIOR_REVIEWER_NAME, LOCAL_MODEL, ReviewerTemplate.SENIOR
+        LOCAL_PREFIX + SENIOR_REVIEWER_NAME,
+        LOCAL_ARCHITECT_MODEL,
+        ReviewerTemplate.SENIOR,
     ),
 ]
 
@@ -128,7 +131,7 @@ DEVELOPERS = [
     # Local developer.
     make_developer(
         FREE_DEVELOPER,
-        LOCAL_MODEL,
+        LOCAL_CODER_MODEL,
         LOCAL_REVIEWERS,
     ),
 ]
@@ -166,7 +169,7 @@ ARCHITECTS = [
     # All local, send nothing.
     make_architect(
         LOCAL_ARCHITECT_NAME,
-        LOCAL_MODEL,
+        LOCAL_ARCHITECT_MODEL,
         [LOCAL_DEVELOPER],
         LOCAL_REVIEWERS,
     ),

@@ -4,6 +4,8 @@ import pathlib
 import string
 from typing import Any, Self
 
+from src.providers import PROVIDERS
+
 from .consts import PRICE_PREFIX_ORDER, Approval, Variants
 
 
@@ -82,14 +84,11 @@ class OpenCode:
             "context-mode": {"type": "local", "command": ["context-mode"]}
         }
         base_dict["plugin"] = ["context-mode"]
-        base_dict["provider"] = {
-            "ollama": {
-                "npm": "@ai-sdk/openai-compatible",
-                "name": "Ollama (local)",
-                "options": {"baseURL": "http://localhost:11434/v1"},
-                "models": {"gemma4:26b": {"name": "Gemma4"}},
-            }
-        }
+        base_dict["provider"] = {}
+
+        for provider in PROVIDERS:
+            provider_dict = provider.get_provider_config()
+            base_dict["provider"].update(**provider_dict)
 
         for agent_dict in base_dict["agent"].values():
             del agent_dict["name"]
