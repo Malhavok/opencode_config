@@ -7,6 +7,7 @@ This repository is to be used as a source of agents and skills for OpenCode. Cur
 - https://senior.software/how-i-actually-use-llms-to-build-software/ – great read, initial approach taken from here
 - https://github.com/martinffx/atelier – agents were further refined using this repository
 - https://github.com/mksglu/context-mode – caveman + mcp for further saving tokens
+- https://github.com/Lum1104/Understand-Anything – worth considering when new repositories are at play
 
 ## The What
 
@@ -15,9 +16,8 @@ This repo provides you with "architect" models that you chat with over the featu
 You have (at the time of writing) four architects available:
 
 - Pro architect – spare no expense, everything is top of the line (Opus, Sonnet, etc).
-- Free architect – uses only free Zen models.
-- Medium architect – uses top model for architect (so the plan is sound), cheap and medium developers, top reviewers.
 - Cheap architect – uses medium model for architect, free and cheap developers, top reviewers.
+- Local architect – nothing leaves your machine.
 
 I can't really see reason to go beyond these four for now, and I need to do much more testing before I can surely say I'm pleased/displeased with any of them. Even free architect seems to have its uses (especially once you run out of tokens at the very end of implementation :p)
 
@@ -30,6 +30,7 @@ If you want to use it as-is, you should connect to Zen first.
 You need to install the following:
 ```bash
 npm install -g context-mode
+curl -fsSL https://raw.githubusercontent.com/Lum1104/Understand-Anything/main/install.sh | bash -s opencode
 ```
 
 ## The Why

@@ -1,16 +1,12 @@
 import enum
 
 PRO_PREFIX = "pro-"
-MEDIUM_PREFIX = "medium-"
 CHEAP_PREFIX = "cheap-"
-FREE_PREFIX = "free-"
 LOCAL_PREFIX = "local-"
 
 PRICE_PREFIX_ORDER = [
     LOCAL_PREFIX,
-    FREE_PREFIX,
     CHEAP_PREFIX,
-    MEDIUM_PREFIX,
     PRO_PREFIX,
 ]
 
