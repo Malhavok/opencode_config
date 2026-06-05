@@ -7,6 +7,9 @@ class Provider:
         self._models = None
         self._model_names = None
 
+    def get_tag(self) -> str:
+        raise NotADirectoryError()
+
     def has_model(self, model_name: str) -> bool:
         return model_name in self.get_models()
 
@@ -39,9 +42,6 @@ class ExternalProvider(Provider):
     def __init__(self):
         self._models = None
         self._model_names = None
-
-    def get_tag(self) -> str:
-        raise NotADirectoryError()
 
     def get_name(self) -> str:
         raise NotADirectoryError()
