@@ -1,9 +1,9 @@
 import subprocess
 
-from .provider import Provider
+from .provider import ExternalProvider
 
 
-class Ollama(Provider):
+class Ollama(ExternalProvider):
     LS_TIMEOUT_SECONDS = 10
     PROMPT_TIMEOUT_SECONDS = 120
 

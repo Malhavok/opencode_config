@@ -4,7 +4,7 @@ import pathlib
 import string
 from typing import Any, Self
 
-from src.providers import PROVIDERS
+from src.providers import ALL_PROVIDERS, EXTERNAL_PROVIDERS
 
 from .consts import PRICE_PREFIX_ORDER, Approval, Variants
 
@@ -86,13 +86,34 @@ class OpenCode:
         base_dict["plugin"] = ["context-mode"]
         base_dict["provider"] = {}
 
-        for provider in PROVIDERS:
-            provider_dict = provider.get_provider_config()
-            base_dict["provider"].update(**provider_dict)
+        for provider_tag, provider in EXTERNAL_PROVIDERS.items():
+            base_dict["provider"][provider_tag] = provider.get_provider_config()
 
         for agent_dict in base_dict["agent"].values():
             del agent_dict["name"]
             del agent_dict["template"]
             del agent_dict["additional_rules"]
 
+        self._validate_agents(base_dict["agent"])
         return base_dict
+
+    def _validate_agents(self, agents_dict: dict[str, Any]) -> None:
+        missing_models = {}
+
+        for agent_name, config in agents_dict.items():
+            provider_name, model = config["model"].split("/", maxsplit=1)
+            if provider_name not in ALL_PROVIDERS:
+                print(
+                    f"Unable to check model for agent {agent_name} – {provider_name} not available."
+                )
+                continue
+
+            provider = ALL_PROVIDERS[provider_name]
+            if not provider.has_model(model):
+                missing_models[agent_name] = model
+                print(
+                    f"Model {model} from provider {provider_name} for agent {agent_name} is not available."
+                )
+
+        if len(missing_models) > 0:
+            raise ValueError(f"Missing models: {missing_models}.")
