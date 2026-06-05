@@ -421,7 +421,7 @@
           "name": "Gemma 4"
         },
         "qwen3.6:27b-mlx": {
-          "name": "Qwen"
+          "name": "Qwen 3.6"
         }
       }
     }
