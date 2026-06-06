@@ -25,8 +25,8 @@ TOP_CODE_MODEL = "opencode/qwen3.6-plus"
 TOP_STRICT_REVIEW_MODEL = "opencode/gpt-5.5"
 TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.5-flash"
 
-LOCAL_ARCHITECT_MODEL = "ollama/gemma4:26b-mlx"
-LOCAL_CODER_MODEL = "ollama/qwen3.6:27b-mlx"
+LOCAL_ARCHITECT_MODEL = "ollama/gemma4:12b-mlx"
+LOCAL_CODER_MODEL = "ollama/qwen3.5:9b-mlx"
 
 PRO_ARCHITECT_NAME = PRO_PREFIX + ARCHITECT_NAME
 CHEAP_ARCHITECT_NAME = CHEAP_PREFIX + ARCHITECT_NAME

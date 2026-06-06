@@ -139,7 +139,7 @@
     "local-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:26b-mlx",
+      "model": "ollama/gemma4:12b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -167,7 +167,7 @@
     "local-reviewer-alternative": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.6:27b-mlx",
+      "model": "ollama/qwen3.5:9b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -195,7 +195,7 @@
     "local-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:26b-mlx",
+      "model": "ollama/gemma4:12b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -262,7 +262,7 @@
     "local-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "ollama/qwen3.6:27b-mlx",
+      "model": "ollama/qwen3.5:9b-mlx",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -355,7 +355,7 @@
         },
         "task": {
           "*": "deny",
-          "ollama/qwen3.6:27b-mlx": "allow",
+          "ollama/qwen3.5:9b-mlx": "allow",
           "opencode/qwen3.6-plus": "allow",
           "pro-reviewer-alternative": "allow",
           "pro-reviewer-strict-diff": "allow",
@@ -367,7 +367,7 @@
     "local-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "ollama/gemma4:26b-mlx",
+      "model": "ollama/gemma4:12b-mlx",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -417,8 +417,14 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "gemma4:26b-mlx": {
+        "kimi-k2.6:cloud": {
+          "name": "Kimi-k 2.6"
+        },
+        "gemma4:12b-mlx": {
           "name": "Gemma 4"
+        },
+        "qwen3.5:9b-mlx": {
+          "name": "Qwen 3.5"
         },
         "qwen3.6:27b-mlx": {
           "name": "Qwen 3.6"
