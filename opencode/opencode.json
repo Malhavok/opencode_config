@@ -139,7 +139,7 @@
     "local-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.6:27b-mlx",
+      "model": "ollama/qwen3.5:9b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -195,7 +195,7 @@
     "local-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.6:27b-mlx",
+      "model": "ollama/qwen3.5:9b-mlx",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -367,7 +367,7 @@
     "local-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "ollama/qwen3.6:27b-mlx",
+      "model": "ollama/qwen3.5:9b-mlx",
       "variant": "high",
       "permission": {
         "edit": "allow",
