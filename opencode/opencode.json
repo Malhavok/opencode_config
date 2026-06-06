@@ -139,7 +139,7 @@
     "local-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:12b-mlx",
+      "model": "ollama/minimax-m3:cloud",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -195,7 +195,7 @@
     "local-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/gemma4:12b-mlx",
+      "model": "ollama/minimax-m3:cloud",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -367,7 +367,7 @@
     "local-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "ollama/gemma4:12b-mlx",
+      "model": "ollama/minimax-m3:cloud",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -417,8 +417,14 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "kimi-k2.6:cloud": {
-          "name": "Kimi-k 2.6"
+        "minimax-m2.5:cloud": {
+          "name": "Minimax-m 2.5"
+        },
+        "minimax-m2.7:cloud": {
+          "name": "Minimax-m 2.7"
+        },
+        "minimax-m3:cloud": {
+          "name": "Minimax-m 3"
         },
         "gemma4:12b-mlx": {
           "name": "Gemma 4"
