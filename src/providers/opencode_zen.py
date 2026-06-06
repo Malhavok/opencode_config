@@ -13,10 +13,7 @@ class OpenCodeZen(Provider):
         json_response = response.json()
         return [model_dict["id"] for model_dict in json_response["data"]]
 
-    def _get_model_printable_name(self, model_name: str) -> str:
-        return "".join([elem.capitalize() for elem in model_name.split("-")])
-
 
 if __name__ == "__main__":
     zen = OpenCodeZen()
-    print(zen.get_models_with_names())
+    print(zen.get_models())

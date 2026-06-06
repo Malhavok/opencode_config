@@ -18,22 +18,6 @@ class Provider:
             self._models = self._get_models()
         return self._models
 
-    def get_models_with_names(self) -> dict[str, str]:
-        return {
-            self._get_model_printable_name(model): model for model in self.get_models()
-        }
-
-    def _get_model_printable_name(self, model_name: str) -> str:
-        base_name = model_name.split(":", maxsplit=1)[0]
-
-        match = re.search(r"([^\d]*)(.*)", base_name)
-        if match is None:
-            return base_name
-
-        name = match.group(1).capitalize()
-        version = match.group(2)
-        return f"{name} {version}"
-
     def _get_models(self) -> list[str]:
         raise NotImplementedError()
 
@@ -62,3 +46,19 @@ class ExternalProvider(Provider):
                 for printable_name, model_name in self.get_models_with_names().items()
             },
         }
+
+    def get_models_with_names(self) -> dict[str, str]:
+        return {
+            self._get_model_printable_name(model): model for model in self.get_models()
+        }
+
+    def _get_model_printable_name(self, model_name: str) -> str:
+        base_name = model_name.split(":", maxsplit=1)[0]
+
+        match = re.search(r"([^\d]*)(.*)", base_name)
+        if match is None:
+            return base_name
+
+        name = match.group(1).capitalize()
+        version = match.group(2)
+        return f"{name} {version}"
