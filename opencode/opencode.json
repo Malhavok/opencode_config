@@ -1,5 +1,5 @@
 {
-  "model": "opencode/claude-opus-4-8",
+  "model": "ollama/qwen3.5:9b-mlx",
   "permission": {
     "edit": "ask",
     "webfetch": "ask",
@@ -136,10 +136,10 @@
         }
       }
     },
-    "local-reviewer-strict-diff": {
+    "free-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.5:9b-mlx",
+      "model": "opencode/big-pickle",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -164,10 +164,10 @@
         }
       }
     },
-    "local-reviewer-alternative": {
+    "free-reviewer-alternative": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.5:9b-mlx",
+      "model": "opencode/deepseek-v4-flash-free",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -192,10 +192,10 @@
         }
       }
     },
-    "local-reviewer-senior": {
+    "free-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "ollama/qwen3.5:9b-mlx",
+      "model": "opencode/big-pickle",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -259,10 +259,10 @@
         }
       }
     },
-    "local-developer": {
+    "free-developer": {
       "mode": "subagent",
       "description": "Implements only the approved plan, then asks reviewers to review the diff.",
-      "model": "ollama/qwen3.5:9b-mlx",
+      "model": "opencode/deepseek-v4-flash-free",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -292,9 +292,9 @@
         },
         "task": {
           "*": "deny",
-          "local-reviewer-alternative": "allow",
-          "local-reviewer-strict-diff": "allow",
-          "local-reviewer-senior": "allow"
+          "free-reviewer-alternative": "allow",
+          "free-reviewer-strict-diff": "allow",
+          "free-reviewer-senior": "allow"
         }
       }
     },
@@ -355,7 +355,7 @@
         },
         "task": {
           "*": "deny",
-          "ollama/qwen3.5:9b-mlx": "allow",
+          "opencode/deepseek-v4-flash-free": "allow",
           "opencode/qwen3.6-plus": "allow",
           "pro-reviewer-alternative": "allow",
           "pro-reviewer-strict-diff": "allow",
@@ -364,10 +364,10 @@
         }
       }
     },
-    "local-architect": {
+    "free-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "ollama/qwen3.5:9b-mlx",
+      "model": "opencode/big-pickle",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -389,10 +389,10 @@
         },
         "task": {
           "*": "deny",
-          "local-developer": "allow",
-          "local-reviewer-alternative": "allow",
-          "local-reviewer-strict-diff": "allow",
-          "local-reviewer-senior": "allow"
+          "free-developer": "allow",
+          "free-reviewer-alternative": "allow",
+          "free-reviewer-strict-diff": "allow",
+          "free-reviewer-senior": "allow"
         }
       }
     }
