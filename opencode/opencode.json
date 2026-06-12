@@ -1,5 +1,5 @@
 {
-  "model": "ollama/qwen3.5:9b-mlx",
+  "model": "ollama/qwen3.6:35b-a3b-coding-nvfp4",
   "permission": {
     "edit": "ask",
     "webfetch": "ask",
@@ -83,7 +83,7 @@
     "pro-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/claude-opus-4-8",
+      "model": "opencode/claude-fable-5",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -111,7 +111,7 @@
     "pro-architect-reviewer": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/claude-opus-4-8",
+      "model": "opencode/claude-fable-5",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -139,7 +139,7 @@
     "free-reviewer-strict-diff": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/big-pickle",
+      "model": "opencode/minimax-m3-free",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -195,7 +195,7 @@
     "free-reviewer-senior": {
       "mode": "subagent",
       "description": "Reviewer with given template.",
-      "model": "opencode/big-pickle",
+      "model": "opencode/minimax-m3-free",
       "variant": "high",
       "permission": {
         "edit": "deny",
@@ -301,7 +301,7 @@
     "pro-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/claude-opus-4-8",
+      "model": "opencode/claude-fable-5",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -367,7 +367,7 @@
     "free-architect": {
       "mode": "primary",
       "description": "Plans features and bugfixes, writes plan files, and orchestrates developer and reviewers.",
-      "model": "opencode/big-pickle",
+      "model": "opencode/minimax-m3-free",
       "variant": "high",
       "permission": {
         "edit": "allow",
@@ -417,23 +417,11 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "minimax-m2.5:cloud": {
-          "name": "Minimax-m 2.5"
-        },
-        "minimax-m2.7:cloud": {
-          "name": "Minimax-m 2.7"
-        },
-        "minimax-m3:cloud": {
-          "name": "Minimax-m 3"
-        },
-        "gemma4:12b-mlx": {
-          "name": "Gemma 4"
-        },
-        "qwen3.5:9b-mlx": {
-          "name": "Qwen 3.5"
-        },
-        "qwen3.6:27b-mlx": {
+        "qwen3.6:35b-a3b-coding-nvfp4": {
           "name": "Qwen 3.6"
+        },
+        "gemma4:26b-nvfp4": {
+          "name": "Gemma 4"
         }
       }
     }
