@@ -25,7 +25,7 @@ TOP_CODE_MODEL = "opencode/qwen3.6-plus"
 TOP_STRICT_REVIEW_MODEL = "opencode/gpt-5.5"
 TOP_ALTERNATIVE_REVIEW_MODEL = "opencode/gemini-3.5-flash"
 
-FREE_ARCHITECT_MODEL = "opencode/minimax-m3-free"
+FREE_ARCHITECT_MODEL = "opencode/big-pickle"
 FREE_CODER_MODEL = "opencode/deepseek-v4-flash-free"
 
 LOCAL_MODEL = "ollama/qwen3.6:35b-a3b-coding-nvfp4"
