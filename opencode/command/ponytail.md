@@ -1,0 +1,1 @@
+/Users/malhavok/Coding/OpenCode/submodules/ponytail/.opencode/command/ponytail.md

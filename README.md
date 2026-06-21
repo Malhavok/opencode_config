@@ -7,7 +7,7 @@ This repository is to be used as a source of agents and skills for OpenCode. Cur
 - https://senior.software/how-i-actually-use-llms-to-build-software/ – great read, initial approach taken from here
 - https://github.com/martinffx/atelier – agents were further refined using this repository
 - https://github.com/mksglu/context-mode – caveman + mcp for further saving tokens
-- https://github.com/Lum1104/Understand-Anything – worth considering when new repositories are at play
+- https://github.com/DietrichGebert/ponytail – said to be a better caveman
 
 ## The What
 
@@ -30,7 +30,6 @@ If you want to use it as-is, you should connect to Zen first.
 You need to install the following:
 ```bash
 npm install -g context-mode
-curl -fsSL https://raw.githubusercontent.com/Lum1104/Understand-Anything/main/install.sh | bash -s opencode
 ```
 
 ## The Why

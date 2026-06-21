@@ -83,7 +83,10 @@ class OpenCode:
         base_dict["mcp"] = {
             "context-mode": {"type": "local", "command": ["context-mode"]}
         }
-        base_dict["plugin"] = ["context-mode"]
+        base_dict["plugin"] = [
+            "context-mode",
+            "./submodules/ponytail/.opencode/plugins/ponytail.mjs",
+        ]
         base_dict["provider"] = {}
 
         for provider_tag, provider in EXTERNAL_PROVIDERS.items():

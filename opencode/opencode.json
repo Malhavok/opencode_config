@@ -407,7 +407,8 @@
     }
   },
   "plugin": [
-    "context-mode"
+    "context-mode",
+    "./submodules/ponytail/.opencode/plugins/ponytail.mjs"
   ],
   "provider": {
     "ollama": {
@@ -417,6 +418,12 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
+        "huggingface.co/unsloth/diffusiongemma-26B-A4B-it-GGUF:latest": {
+          "name": "Huggingface.co/unsloth/diffusiongemma- 26B-A4B-it-GGUF"
+        },
+        "north-mini-code-1.0:mlx-nvfp4": {
+          "name": "North-mini-code- 1.0"
+        },
         "qwen3.6:35b-a3b-coding-nvfp4": {
           "name": "Qwen 3.6"
         },
