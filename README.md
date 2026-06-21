@@ -30,6 +30,7 @@ If you want to use it as-is, you should connect to Zen first.
 You need to install the following:
 ```bash
 npm install -g context-mode
+git submodule update --init --recursive
 ```
 
 ## The Why
