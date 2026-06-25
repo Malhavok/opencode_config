@@ -8,6 +8,7 @@ This repository is to be used as a source of agents and skills for OpenCode. Cur
 - https://github.com/martinffx/atelier – agents were further refined using this repository
 - https://github.com/mksglu/context-mode – caveman + mcp for further saving tokens
 - https://github.com/DietrichGebert/ponytail – said to be a better caveman
+- https://github.com/aeroxy/ast-bro – look at codebases from the perspective of code, not text
 
 ## The What
 
@@ -16,10 +17,10 @@ This repo provides you with "architect" models that you chat with over the featu
 You have (at the time of writing) four architects available:
 
 - Pro architect – spare no expense, everything is top of the line (Opus, Sonnet, etc).
-- Cheap architect – uses medium model for architect, free and cheap developers, top reviewers.
-- Local architect – nothing leaves your machine.
+- Cheap architect – uses coder model for architect, free and cheap developers, top reviewers + architecture reviewer.
+- Free architect – uses free model for architect, free developers, free reviewers.
 
-I can't really see reason to go beyond these four for now, and I need to do much more testing before I can surely say I'm pleased/displeased with any of them. Even free architect seems to have its uses (especially once you run out of tokens at the very end of implementation :p)
+I can't really see reason to go beyond these three for now, and I need to do much more testing before I can surely say I'm pleased/displeased with any of them. Cheap architect is my way to go – with architecture review it proved itself a fre times now without breaking my wallet. Free architect is decent for playing around or e.g. making simple games in Usagi or Love2D. I don't know why I'm keeping the Pro tho – it's too expensive to be used just-like-that.
 
 ## Assumptions
 
@@ -31,6 +32,7 @@ You need to install the following:
 ```bash
 npm install -g context-mode
 git submodule update --init --recursive
+brew install aeroxy/tap/ast-bro
 ```
 
 ## The Why
