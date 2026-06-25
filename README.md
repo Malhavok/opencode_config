@@ -9,6 +9,7 @@ This repository is to be used as a source of agents and skills for OpenCode. Cur
 - https://github.com/mksglu/context-mode – caveman + mcp for further saving tokens
 - https://github.com/DietrichGebert/ponytail – said to be a better caveman
 - https://github.com/aeroxy/ast-bro – look at codebases from the perspective of code, not text
+- https://github.com/oraios/serena – another AST approach to coding
 
 ## The What
 
@@ -33,6 +34,7 @@ You need to install the following:
 npm install -g context-mode
 git submodule update --init --recursive
 brew install aeroxy/tap/ast-bro
+uv tool install -p 3.13 serena-agent
 ```
 
 ## The Why

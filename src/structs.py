@@ -81,7 +81,11 @@ class OpenCode:
 
         # Silly install for context-mode. This should be done better in the future.
         base_dict["mcp"] = {
-            "context-mode": {"type": "local", "command": ["context-mode"]}
+            "context-mode": {"type": "local", "command": ["context-mode"]},
+            "serena": {
+                "type": "local",
+                "command": ["serena", "start-mcp-server", "--context=ide"],
+            },
         }
         base_dict["plugin"] = [
             "context-mode",

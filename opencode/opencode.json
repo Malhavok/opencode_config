@@ -404,6 +404,14 @@
       "command": [
         "context-mode"
       ]
+    },
+    "serena": {
+      "type": "local",
+      "command": [
+        "serena",
+        "start-mcp-server",
+        "--context=ide"
+      ]
     }
   },
   "plugin": [
@@ -418,9 +426,6 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
-        "huggingface.co/unsloth/diffusiongemma-26B-A4B-it-GGUF:latest": {
-          "name": "Huggingface.co/unsloth/diffusiongemma- 26B-A4B-it-GGUF"
-        },
         "north-mini-code-1.0:mlx-nvfp4": {
           "name": "North-mini-code- 1.0"
         },
