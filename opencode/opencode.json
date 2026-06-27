@@ -1,9 +1,17 @@
 {
   "model": "ollama/qwen3.6:35b-a3b-coding-nvfp4",
   "permission": {
-    "edit": "ask",
-    "webfetch": "ask",
+    "edit": "allow",
+    "webfetch": "allow",
     "bash": {
+      "mkdir *": "allow",
+      "npm test*": "allow",
+      "pnpm test*": "allow",
+      "pytest*": "allow",
+      "go test*": "allow",
+      "cargo test*": "allow",
+      "mix *": "allow",
+      "docker compose *": "allow",
       "git status*": "allow",
       "git diff*": "allow",
       "grep *": "allow",
@@ -17,10 +25,10 @@
       "cat *": "allow",
       "wc *": "allow",
       "echo *": "allow",
-      "*": "ask"
+      "*": "allow"
     },
     "task": {
-      "*": "ask"
+      "*": "allow"
     }
   },
   "agent": {
@@ -426,6 +434,12 @@
         "baseURL": "http://localhost:11434/v1"
       },
       "models": {
+        "hf.co/empero-ai/Qwythos-9B-Claude-Mythos-5-1M-GGUF:Q4_K_M": {
+          "name": "Hf.co/empero-ai/qwythos- 9B-Claude-Mythos-5-1M-GGUF"
+        },
+        "hf.co/deepreinforce-ai/Ornith-1.0-35B-GGUF:Q4_K_M": {
+          "name": "Hf.co/deepreinforce-ai/ornith- 1.0-35B-GGUF"
+        },
         "north-mini-code-1.0:mlx-nvfp4": {
           "name": "North-mini-code- 1.0"
         },

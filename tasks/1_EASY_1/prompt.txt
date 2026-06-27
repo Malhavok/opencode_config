@@ -1,0 +1,1 @@
+Write the content of the input back to the user.

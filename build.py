@@ -3,7 +3,7 @@ import pathlib
 
 from src import structs
 from src.agents import AGENTS, LOCAL_MODEL
-from src.consts import SAFE_BASH, Approval
+from src.consts import DEVELOPER_BASH, Approval
 
 DEFAULT_MODEL = LOCAL_MODEL
 OPENCODE_FILE = pathlib.Path("./opencode/opencode.json")
@@ -14,7 +14,11 @@ def main() -> None:
     open_code = structs.OpenCode(
         model=DEFAULT_MODEL,
         permission=structs.Permissions.make(
-            bash=SAFE_BASH, task={}, default_approval=Approval.ASK
+            bash=DEVELOPER_BASH,
+            task={},
+            default_approval=Approval.ALLOW,
+            edit_approval=Approval.ALLOW,
+            webfetch_approval=Approval.ALLOW,
         ),
         agent={agent.name: agent for agent in AGENTS},
     )

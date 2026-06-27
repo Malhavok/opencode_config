@@ -6,3 +6,4 @@ __pycache__
 **/__pycache__
 
 opencode/context-mode/
+.evaluate_cache/

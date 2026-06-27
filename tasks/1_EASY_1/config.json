@@ -1,0 +1,6 @@
+{
+  "inputs": ["./input.txt"],
+  "expected_result": "./result.txt",
+  "prompt": "./prompt.txt",
+  "language": "python"
+}

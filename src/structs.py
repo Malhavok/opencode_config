@@ -27,10 +27,12 @@ class Permissions:
         bash: dict[str, Approval],
         task: dict[str, Approval],
         default_approval: Approval = Approval.ASK,
+        edit_approval: Approval = Approval.ASK,
+        webfetch_approval: Approval = Approval.ASK,
     ) -> Self:
         return cls(
-            edit=Approval.ASK,
-            webfetch=Approval.ASK,
+            edit=edit_approval,
+            webfetch=webfetch_approval,
             bash=dict(
                 **bash,
                 **{"*": default_approval},
